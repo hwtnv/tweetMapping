@@ -4,18 +4,18 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<meta name="description" content="東日本大震災により大きな被害を受けた石巻市大川地区の「まちの記憶」を伝えるデジタルアーカイブ" />
-	<meta property="og:image" content="https://lostcity.archiving.jp/data/screen.jpg" />
-	<meta property="og:description" content="東日本大震災により大きな被害を受けた石巻市大川地区の「まちの記憶」を伝えるデジタルアーカイブ" />
+	<meta name="description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
+	<meta property="og:image" content="https://tweet.mapping.jp/data/screen.jpg" />
+	<meta property="og:description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@hwtnv" />
 	<meta name="twitter:creator" content="@hwtnv" />
-	<meta name="twitter:title" content="記憶の街アーカイブ・石巻市大川地区" />
-	<meta name="twitter:description" content="東日本大震災により大きな被害を受けた石巻市大川地区の「まちの記憶」を伝えるデジタルアーカイブ" />
-	<meta name="twitter:image" content="https://lostcity.archiving.jp/data/screen.jpg" />
+	<meta name="twitter:title" content="東日本大震災ツイートマッピング" />
+	<meta name="twitter:description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
+	<meta name="twitter:image" content="https://tweet.mapping.jp/data/screen.jpg" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<title>記憶の街アーカイブ・石巻市大川地区</title>
+	<title>東日本大震災ツイートマッピング</title>
 	<link rel="SHORTCUT ICON" href="https://shinsai.mapping.jp/favicon.ico">
 	<style>
 		@import url(Cesium/Widgets/widgets.css);
@@ -247,7 +247,7 @@
 			scaleByDistance = new Cesium.NearFarScalar(0.0,0.8,7500,0.35);
 			translucencyByDistance = new Cesium.NearFarScalar(500.0,1.0,100000,0.1);
 
-			setTimeout('groundZero()', 1000);
+			setTimeout('groundZero()', 3000);
 		}
 
 		function groundZero() {
@@ -403,7 +403,7 @@
 		//ヘルプ
 
 		function move2d() {
-			window.open('https://www.losthomes.jp/');
+			window.open('https://labo.wtnv.jp/');
 		}
 
 		//DIVのフェードイン・アウト	
