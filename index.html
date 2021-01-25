@@ -162,6 +162,7 @@
 		var viewPointsArray = [];
 		viewPointsArray[0] = new viewPoints("日本全体", 34.009340, 135.843524, -47, -50, 2000000);
 		viewPointsArray[1] = new viewPoints("東京都", 35.67623749668245, 139.75142329682316, 0, -60, 30000);
+		viewPointsArray[2] = new viewPoints("皇居", 35.6835836,139.7508397, 0, -60, 2000);
 
 		//ビューア初期化	
 
@@ -245,7 +246,7 @@
 			billboards = viewer.scene.primitives.add(billboardCollection);
 			labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
 			pixelOffset = new Cesium.Cartesian2(0.0, -20);
-			scaleByDistance = new Cesium.NearFarScalar(0.0, 0.8, 7500, 0.35);
+			scaleByDistance = new Cesium.NearFarScalar(0.0, 0.75, 7500, 0.35);
 			translucencyByDistance = new Cesium.NearFarScalar(500.0, 1.0, 100000, 0.1);
 
 			setTimeout('groundZero()', 3000);
@@ -297,6 +298,7 @@
 						loadingDiv.innerHTML = "<p class='twCounter'>Completed!</p>";
 						setTimeout('fadeInOut(blackOutDiv,0)', 1000);
 						setTimeout('fadeInOut(loadingDiv,0)', 1000);
+						setTimeout('changeViewPoint(2, 3)', 1000);
 						break;
 					} else {
 						var id = json[jsonNum].id;
