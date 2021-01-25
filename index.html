@@ -79,7 +79,9 @@
 		</div>
 	</div>
 	-->
-	<div id="twCounter" class="twCounter"><p>Loading...</p></div>
+	<div id="twCounter" class="twCounter">
+		<p>Loading...</p>
+	</div>
 	<div id="slide_menu"></div>
 	<div id="slide_menu2"></div>
 	<script>
@@ -244,8 +246,8 @@
 			billboards = viewer.scene.primitives.add(billboardCollection);
 			labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
 			pixelOffset = new Cesium.Cartesian2(0.0, -20);
-			scaleByDistance = new Cesium.NearFarScalar(0.0,0.8,7500,0.35);
-			translucencyByDistance = new Cesium.NearFarScalar(500.0,1.0,100000,0.1);
+			scaleByDistance = new Cesium.NearFarScalar(0.0, 0.8, 7500, 0.35);
+			translucencyByDistance = new Cesium.NearFarScalar(500.0, 1.0, 100000, 0.1);
 
 			setTimeout('groundZero()', 3000);
 		}
@@ -258,7 +260,7 @@
 				}, 1000);
 			});
 			changeViewPoint(0, 3);
-			setTimeout('landing()', 4000);
+			setTimeout('landing()', 3000);
 		}
 
 		function landing() {
@@ -273,31 +275,31 @@
 		var jsonNum = 0;
 		var timer;
 
-		function loadTweets (){
-			timer = setInterval(function(){
+		function loadTweets() {
+			timer = setInterval(function () {
 				loadJsonTestimony();
 				viewer.scene.requestRender();
-			},1);
+			}, 1);
 		}
 
-		function stopTimer(){
+		function stopTimer() {
 			clearInterval(timer);
 		}
 
 		function loadJsonTestimony() {
-				var jsonFile = "data/czml/geoTweetTextOnly.json";
-				$.getJSON(jsonFile, function (json) {
-					for (var i=0; i<100; i++) {
-						//console.log (jsonNum,json.length);
-						if (jsonNum >= json.length){
-							//console.log ("looped",jsonNum,json.length);
-							stopTimer();
-							delete jsonFile;
-							loadingDiv.innerHTML =  "<p class='twCounter'>Completed!</p>";
-							setTimeout('fadeInOut(blackOutDiv,0)', 1000);
-							setTimeout('fadeInOut(loadingDiv,0)', 1000);
-							break;
-						} else {
+			var jsonFile = "data/czml/geoTweetTextOnly.json";
+			$.getJSON(jsonFile, function (json) {
+				for (var i = 0; i < 100; i++) {
+					//console.log (jsonNum,json.length);
+					if (jsonNum >= json.length) {
+						//console.log ("looped",jsonNum,json.length);
+						stopTimer();
+						delete jsonFile;
+						loadingDiv.innerHTML = "<p class='twCounter'>Completed!</p>";
+						setTimeout('fadeInOut(blackOutDiv,0)', 1000);
+						setTimeout('fadeInOut(loadingDiv,0)', 1000);
+						break;
+					} else {
 						var id = json[jsonNum].id;
 						var name = json[jsonNum].text;
 						var iconUrl = json[jsonNum].billboard.image;
@@ -307,10 +309,10 @@
 						billboardLabelAdd(id, positionsCartesian3, iconUrl, name);
 						jsonNum++;
 						loadingDiv.innerHTML = "<p>" + jsonNum + "/" + json.length + "</p>";
-						}
 					}
-				});
-			}
+				}
+			});
+		}
 
 
 		var id;
@@ -343,7 +345,7 @@
 				fillColor: Cesium.Color.WHITE,
 				pixelOffset: pixelOffset,
 				text: name,
-				scaleByDistance:scaleByDistance,
+				scaleByDistance: scaleByDistance,
 				translucencyByDistance: translucencyByDistance
 			});
 		}
@@ -403,7 +405,9 @@
 		//ヘルプ
 
 		function move2d() {
-			window.open('https://docs.google.com/document/d/e/2PACX-1vRQZnEnkDWR7fwuMdft95YBaIZN67GwG5LQNPufkWFxbr-2ijKjZlfYFBUwCOZq9vastRJGZxcoU0vq/pub');
+			window.open(
+				'https://docs.google.com/document/d/e/2PACX-1vRQZnEnkDWR7fwuMdft95YBaIZN67GwG5LQNPufkWFxbr-2ijKjZlfYFBUwCOZq9vastRJGZxcoU0vq/pub'
+				);
 		}
 
 		//DIVのフェードイン・アウト	
