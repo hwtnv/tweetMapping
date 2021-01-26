@@ -2,9 +2,9 @@
   font-family: "LigatureSymbols";
   src: url("../font/LigatureSymbols-2.11.eot");
   src: url("../font/LigatureSymbols-2.11.eot?#iefix") format("embedded-opentype"),
-           url("../font/LigatureSymbols-2.11.woff") format("woff"),
-           url("../font/LigatureSymbols-2.11.ttf") format("truetype"),
-           url("../font/LigatureSymbols-2.11.svg#LigatureSymbols") format("svg");
+    url("../font/LigatureSymbols-2.11.woff") format("woff"),
+    url("../font/LigatureSymbols-2.11.ttf") format("truetype"),
+    url("../font/LigatureSymbols-2.11.svg#LigatureSymbols") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -33,38 +33,38 @@
 // change
 ----------------------------------------- */
 
-.general-button  {
+.general-button {
   border-radius: 5px;
   background-color: #303336;
 }
 
-.general-button:before  {
+.general-button:before {
   border-radius: 5px;
-  border-bottom: 0px solid rgba(12,12,13, 0);
-  background-color: rgba(12,12,13, 0);
+  border-bottom: 0px solid rgba(12, 12, 13, 0);
+  background-color: rgba(12, 12, 13, 0);
 }
 
-.button-content  {
+.button-content {
   border-radius: 0px 0px 5px 5px;
   padding: 2px 4.5px;
-  box-shadow: 0px 0px 0px 0px rgba(12,12,13, 0);
+  box-shadow: 0px 0px 0px 0px rgba(12, 12, 13, 0);
   color: #f8f8f8;
 }
 
-.button-text  {
+.button-text {
   padding: 0px 4px;
   line-height: 1em;
   font-size: 60px;
 }
 
-.icon-font  {
+.icon-font {
   padding: 0px 4px;
   font-size: 32px;
 }
 
 /*----------------- at hover -----------------*/
 
-.general-button:hover  {
+.general-button:hover {
 
   transition: all 0ms;
   -moz-transition: all 0ms;
@@ -73,16 +73,16 @@
   background-color: #373a3e;
 }
 
-.general-button:hover:before  {
-  border-bottom: 1px solid rgba(12,12,13, 0);
+.general-button:hover:before {
+  border-bottom: 1px solid rgba(12, 12, 13, 0);
   transition: all 0ms;
   -moz-transition: all 0ms;
   -webkit-transition: all 0ms;
   -o-transition: all 0ms;
 }
 
-.general-button:hover .button-content  {
-  box-shadow: 0px 1px 0px 0px rgba(12,12,13, 1);
+.general-button:hover .button-content {
+  box-shadow: 0px 1px 0px 0px rgba(12, 12, 13, 1);
   transition: all 0ms;
   -moz-transition: all 0ms;
   -webkit-transition: all 0ms;
@@ -91,19 +91,19 @@
 
 /*----------------- at active -----------------*/
 
-.general-button:active  {
+.general-button:active {
   background-color: #242628;
-  box-shadow: 0px 1.2px 0px 0px rgba(0,0,0, 1) inset;
+  box-shadow: 0px 1.2px 0px 0px rgba(0, 0, 0, 1) inset;
 }
 
-.general-button:active:before  {
+.general-button:active:before {
 
   padding-bottom: 1px;
-  border-bottom: 0px solid rgba(12,12,13, 0);
+  border-bottom: 0px solid rgba(12, 12, 13, 0);
 }
 
-.general-button:active .button-content  {
-  box-shadow: 0px 0px 0px 0px rgba(12,12,13, 0);
+.general-button:active .button-content {
+  box-shadow: 0px 0px 0px 0px rgba(12, 12, 13, 0);
 }
 
 /*------------------------------------------
@@ -115,23 +115,25 @@
 // not change
 ----------------------------------------- */
 
-.general-button  {
+.general-button {
   display: -moz-inline-box;
   display: inline-block;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select: none;transition: all 0ms;
+  -ms-user-select: none;
+  transition: all 0ms;
   -moz-transition: all 0ms;
   -webkit-transition: all 0ms;
-  -o-transition: all 0ms;position: relative;
+  -o-transition: all 0ms;
+  position: relative;
 
   cursor: pointer;
   text-decoration: none;
   line-height: 1;
 }
 
-.general-button:before  {
+.general-button:before {
   content: '';
   position: absolute;
   top: 0;
@@ -140,7 +142,7 @@
   height: 100%;
 }
 
-.button-content  {
+.button-content {
   display: table;
   transition: all 0ms;
   -moz-transition: all 0ms;
@@ -148,34 +150,34 @@
   -o-transition: all 0ms;
 }
 
-.button-text  {
+.button-text {
   display: table-cell;
   vertical-align: middle;
   text-decoration: none;
 }
 
-.icon-font  {
+.icon-font {
   display: table-cell;
   vertical-align: middle;
 }
 
 /*----------------- at hover -----------------*/
 
-.general-button:hover  {
+.general-button:hover {
   transition-timing-function: ease-in-out;
 }
 
-.general-button:hover:before  {
+.general-button:hover:before {
   transition-timing-function: ease-in-out;
 }
 
-.general-button:hover .button-content  {
+.general-button:hover .button-content {
   transition-timing-function: ease-in-out;
 }
 
 /*----------------- at active -----------------*/
 
-.general-button:active  {
+.general-button:active {
 
   transition: all 0ms;
   -moz-transition: all 0ms;
@@ -183,14 +185,14 @@
   -o-transition: all 0ms;
 }
 
-.general-button:active:before  {
+.general-button:active:before {
   transition: all 0ms;
   -moz-transition: all 0ms;
   -webkit-transition: all 0ms;
   -o-transition: all 0ms;
 }
 
-.general-button:active .button-content  {
+.general-button:active .button-content {
   transition: all 0ms;
   -moz-transition: all 0ms;
   -webkit-transition: all 0ms;
@@ -207,35 +209,35 @@
 
 /*----------------- at hover -----------------*/
 
-.touch .general-button:hover  {
+.touch .general-button:hover {
 
   background-color: #303336;
 }
 
-.touch .general-button:hover:before  {
-  border-bottom: 0px solid rgba(12,12,13, 0);
+.touch .general-button:hover:before {
+  border-bottom: 0px solid rgba(12, 12, 13, 0);
 }
 
-.touch .general-button:hover .button-content  {
-  box-shadow: 0px 0px 0px 0px rgba(12,12,13, 1);
+.touch .general-button:hover .button-content {
+  box-shadow: 0px 0px 0px 0px rgba(12, 12, 13, 1);
 
 }
 
 /*----------------- at active -----------------*/
 
-.touch .general-button:active  {
+.touch .general-button:active {
   background-color: #242628;
-  box-shadow: 0px 1.2px 0px 0px rgba(0,0,0, 1) inset;
+  box-shadow: 0px 1.2px 0px 0px rgba(0, 0, 0, 1) inset;
 }
 
-.touch .general-button:active:before  {
+.touch .general-button:active:before {
 
   padding-bottom: 1px;
-  border-bottom: 0px solid rgba(12,12,13, 0);
+  border-bottom: 0px solid rgba(12, 12, 13, 0);
 }
 
-.touch .general-button:active .button-content  {
-  box-shadow: 0px 0px 0px 0px rgba(12,12,13, 0);
+.touch .general-button:active .button-content {
+  box-shadow: 0px 0px 0px 0px rgba(12, 12, 13, 0);
 }
 
 /*------------------------------------------
