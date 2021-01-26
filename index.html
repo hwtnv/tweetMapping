@@ -211,22 +211,22 @@
 			//baseLayer配列を用意
 			var imageryViewModels = [];
 
-			var satelliteMap = new Cesium.ArcGisMapServerImageryProvider({
-				url: '//server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer',
-				enablePickFeatures: false
+			var satelliteMap = new Cesium.BingMapsImageryProvider({
+				url: 'https://dev.virtualearth.net',
+				key: 'AsodXdy--iu4mZT9y92T3Ip2CyoNbOfG1fCCyjhDuTpUpMwtdGpB86T7Ut2-t6LJ',
+				mapStyle: Cesium.BingMapsStyle.AERIAL
 			});
 
-			var roadMap = new Cesium.OpenStreetMapImageryProvider({
-				url: 'https://a.tile.openstreetmap.org/',
+			var roadMap = new Cesium.BingMapsImageryProvider({
+				url: 'https://dev.virtualearth.net',
+				key: 'AsodXdy--iu4mZT9y92T3Ip2CyoNbOfG1fCCyjhDuTpUpMwtdGpB86T7Ut2-t6LJ',
+				mapStyle: Cesium.BingMapsStyle.CANVAS_DARK
 			});
 
 			imageryViewModels.push(new Cesium.ProviderViewModel({
-				name: 'ESRI National Geographic',
-				iconUrl: Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/esriNationalGeographic.png'),
-				tooltip: 'The National Geographic basemap is designed to be used as a general reference map for informational and educational purposes.',
+				name: '航空写真',
+				iconUrl: Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/bingAerial.png'),
 				creationFunction: function () {
-					//layers._layers[0].brightness = 0.5;
-					console.log(layers._layers);
 					setTimeout(function () {
 						layers._layers[0].brightness = 0.5;
 					}, 10);
@@ -236,15 +236,14 @@
 
 			//Osm
 			imageryViewModels.push(new Cesium.ProviderViewModel({
-				name: 'Open Street Map',
-				iconUrl: Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/openStreetMap.png'),
-				tooltip: 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org',
+				name: '道路地図',
+				iconUrl: Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/bingRoads.png'),
 				creationFunction: function () {
-					//layers._layers[0].brightness = 0.5;
-					console.log(layers._layers);
+/*					
 					setTimeout(function () {
-						layers._layers[0].brightness = 0.5;
+						layers._layers[0].brightness = 0.8;
 					}, 10);
+*/
 					return roadMap;
 				}
 			}));
@@ -255,7 +254,6 @@
 				globe: viewer.scene.globe,
 				imageryProviderViewModels: imageryViewModels
 			});
-			console.log(layers._layers);
 
 
 			/* baseLayerPickerここまで */

@@ -94,7 +94,10 @@ html, body, #cesiumContainer {
 .cesium-button {
     color: rgb(180, 180, 180);
     fill: rgb(180, 180, 180);
-    cursor: pointer;
+		cursor: pointer;
+		right: 50px;
+    top: 6px;
+    position: absolute;
 }
 
 button.cesium-infoBox-close {
