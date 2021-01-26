@@ -41,11 +41,12 @@ html, body, #cesiumContainer {
 }
 
 .cesium-baseLayerPicker-dropDown {
-	right:-44px;
+	right: -175px;
 }
 
 .cesium-baseLayerPicker-dropDown-visible {
-	right:-44px;
+	right: -175px;
+	z-index:20000;
 }
 
 .cesium-infoBox-iframe {
