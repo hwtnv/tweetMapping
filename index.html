@@ -217,10 +217,9 @@
 				mapStyle: Cesium.BingMapsStyle.AERIAL
 			});
 
-			var roadMap = new Cesium.BingMapsImageryProvider({
-				url: 'https://dev.virtualearth.net',
-				key: 'AsodXdy--iu4mZT9y92T3Ip2CyoNbOfG1fCCyjhDuTpUpMwtdGpB86T7Ut2-t6LJ',
-				mapStyle: Cesium.BingMapsStyle.CANVAS_DARK
+			var roadMap = new Cesium.OpenStreetMapImageryProvider({
+				url: 'https://cyberjapandata.gsi.go.jp/xyz/pale/',
+				credit: '国土地理院'
 			});
 
 			imageryViewModels.push(new Cesium.ProviderViewModel({
@@ -236,14 +235,13 @@
 
 			//Osm
 			imageryViewModels.push(new Cesium.ProviderViewModel({
-				name: '道路地図',
+				name: '詳細地図',
 				iconUrl: Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/bingRoads.png'),
 				creationFunction: function () {
-/*					
 					setTimeout(function () {
-						layers._layers[0].brightness = 0.8;
+						layers._layers[0].brightness = 0.25;
+						layers._layers[0].saturation = 0.2;
 					}, 10);
-*/
 					return roadMap;
 				}
 			}));
