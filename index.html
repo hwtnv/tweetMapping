@@ -73,13 +73,11 @@
 			<span class="icon-font">help</span>
 		</div>
 	</div>
-	<!--
-	<div id="button3" class="general-button">
+	<div id="buttonGeo" class="general-button" onclick="flyToMyLocation();">
 		<div class="button-content">
-			<span class="icon-font">paramater</span>
+			<span class="icon-font">geo</span>
 		</div>
 	</div>
-	-->
 	<div id="twCounter" class="twCounter">
 		<p>Loading...</p>
 	</div>
@@ -263,22 +261,22 @@
 
 			//LOD，地形掩蔽設定
 
-			//scene.globe.maximumScreenSpaceError = 3;
+			scene.globe.maximumScreenSpaceError = 3;
 			viewer.scene.globe.depthTestAgainstTerrain = true;
 
 			//OSM Buildings
-			/*
+/*
 			viewer.scene.primitives.add(Cesium.createOsmBuildings({
 				dynamicScreenSpaceError: true,
 				style: new Cesium.Cesium3DTileStyle({
 					color: {
 						conditions: [
-							[true, "color('#666666',0.3)"]
+							[true, "color('#bbbbbb',0.35)"]
 						]
 					}
 				})
 			}));
-			*/
+*/
 			//フォグ
 			/*
 			var fog = new Cesium.Fog();
@@ -305,7 +303,7 @@
 			scaleByDistance = new Cesium.NearFarScalar(0.0, 0.75, 7500, 0.35);
 			translucencyByDistance = new Cesium.NearFarScalar(500.0, 1.0, 100000, 0.1);
 
-			setTimeout('groundZero()', 3000);
+			setTimeout('groundZero()', 1000);
 		}
 
 		function groundZero() {
@@ -457,6 +455,19 @@
 					}
 				}
 			);
+		}
+
+		//現在地へ移動
+
+		function flyToMyLocation() {
+			function fly(position) {
+				viewer.camera.flyTo({
+					destination: Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude,
+						3000.0),
+					easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT
+				});
+			}
+			navigator.geolocation.getCurrentPosition(fly);
 		}
 
 		//ヘルプ
