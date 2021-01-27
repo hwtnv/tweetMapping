@@ -43,11 +43,11 @@ body,
 }
 
 .cesium-baseLayerPicker-dropDown {
-    right: -175px;
+    right: -100px;
 }
 
 .cesium-baseLayerPicker-dropDown-visible {
-    right: -175px;
+    right: -100px;
     z-index: 20000;
 }
 
