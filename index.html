@@ -390,6 +390,7 @@
 					}
 				}
 			});
+			console.log(viewer.scene.primitives._primitives);
 		}
 
 
@@ -517,6 +518,47 @@
 				$(function () {
 					$(layer).fadeIn("slow");
 				});
+			}
+		}
+
+		//テキスト検索
+
+		function textSearch() {
+			var searchQuery = document.getElementById('searchQuery').value;
+			var dataSources = viewer.dataSources._dataSources;
+			var i = 0;
+			while (i < dataSources.length) {
+				var entityCollectionArray = dataSources[i]._entityCollection._entities._array;
+				var j = 0;
+				while (j < entityCollectionArray.length) {
+					if (entityCollectionArray[j].description !== void 0 &&
+						entityCollectionArray[j].name !== void 0) {
+						var description = entityCollectionArray[j].description._value;
+						var
+							name = entityCollectionArray[j].name;
+						if (name.indexOf(searchQuery) != -1 || description.indexOf(searchQuery) != -1) {
+							entityCollectionArray[j].show = true;
+						} else {
+							entityCollectionArray[j].show = false;
+						}
+					}
+					j++;
+				}
+				i++;
+				var
+					entitiesArray = viewer.entities._entities._array;
+				var n = 0;
+				while (n < entitiesArray.length) {
+					if (entitiesArray[n].description !== void 0) {
+						var entityDescription = entitiesArray[n].description._value;
+						if (entityDescription.indexOf(searchQuery) != -1) {
+							entitiesArray[n].show = true;
+						} else {
+							entitiesArray[n].show = false;
+						}
+					}
+					n++;
+				}
 			}
 		}
 	</script>
