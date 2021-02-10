@@ -54,6 +54,11 @@
 		<input id="inputtext" class="textbox" type="text" value="" placeholder="地名で検索" />
 		</form>
 	</div>
+	<div id="textSearch">
+		<form action="javascript:textSearch()" class="textbox" />
+		<input id="searchQuery" class="textbox" type="text" value="" placeholder="テキスト検索" />
+		</form>
+	</div>
 	<div class="titleScreen">
 		<p>
 			<img class="titleImage" src="data/logo.png">
@@ -351,6 +356,7 @@
 
 		var jsonNum = 0;
 		var timer;
+		var jsonArray = [];
 
 		function loadTweets() {
 			timer = setInterval(function () {
@@ -385,14 +391,17 @@
 						positions[2] = 200 + 200 * Math.random();
 						var positionsCartesian3 = Cesium.Cartesian3.fromDegreesArrayHeights(positions)[0];
 						billboardLabelAdd(id, positionsCartesian3, iconUrl, name);
+						jsonArray.push({
+							id: id,
+							text: name
+						});
 						jsonNum++;
 						loadingDiv.innerHTML = "<p>" + jsonNum + "/" + json.length + "</p>";
 					}
 				}
 			});
-			console.log(viewer.scene.primitives._primitives);
+			//console.log(viewer.scene.primitives._primitives);
 		}
-
 
 		var id;
 		var positionsCartesian3;
@@ -524,7 +533,17 @@
 		//テキスト検索
 
 		function textSearch() {
-			var searchQuery = document.getElementById('searchQuery').value;
+			console.log(jsonArray);
+			var searchQuery = String(document.getElementById('searchQuery').value);
+			var targetObject = jsonArray.filter(function (item, index) {
+				if (item.text.indexOf(searchQuery) == true) {
+					return searchQuery;
+				}
+			});
+
+			console.log(targetObject);
+
+			/*
 			var dataSources = viewer.dataSources._dataSources;
 			var i = 0;
 			while (i < dataSources.length) {
@@ -560,6 +579,7 @@
 					n++;
 				}
 			}
+			*/
 		}
 	</script>
 </body>
