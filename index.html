@@ -98,8 +98,7 @@
 		<p>Loading...</p>
 	</div>
 	<script>
-		//端末種別と画面サイズ
-
+		//端末種別と画面サイズ判別
 		var mobile = 0;
 		var smallScreen = 0;
 
@@ -123,7 +122,6 @@
 		}
 
 		//画面サイズ調整
-
 		if (mobile != 1) {
 			setTimeout('resizeWindow()', 0);
 		} else {
@@ -144,9 +142,7 @@
 			setTimeout('loadCesium()', 100);
 		}
 
-
 		//スワイプによるスクロール禁止
-
 		var cesiumDiv = document.getElementById("cesiumContainer");
 
 		function preventScroll(event) {
@@ -158,12 +154,10 @@
 		cesiumDiv.addEventListener("gestureend", preventScroll, false);
 
 		//各種DIV
-
 		var blackOutDiv = document.getElementById("blackOut");
 		var loadingDiv = document.getElementById("twCounter");
 
-		//視点作成配列
-
+		//視点配列
 		function viewPoints(_label, _lat, _lng, _heading, _pitch, _range) {
 			this.label = _label;
 			this.lat = _lat;
@@ -179,10 +173,8 @@
 		viewPointsArray[2] = new viewPoints("皇居", 35.6835836, 139.7508397, 0, -60, 2000);
 
 		//ビューア初期化	
-
 		var viewer;
 		var scene;
-		var layers;
 
 		function loadCesium() {
 			Cesium.Ion.defaultAccessToken =
@@ -204,7 +196,6 @@
 			globe.baseColor = Cesium.Color.fromCssColorString('#000000');
 
 			/* ここからbaseLayerPicker追加 */
-
 			var layers = viewer.imageryLayers;
 
 			//baseLayer配列を用意
@@ -268,7 +259,6 @@
 			}));
 
 			//baseLayerPickerボタンを追加
-
 			var baseLayerPicker = new Cesium.BaseLayerPicker('baseLayerPickerContainer', {
 				globe: viewer.scene.globe,
 				imageryProviderViewModels: imageryViewModels
@@ -282,11 +272,9 @@
 			viewer.camera.frustum.fov = Cesium.Math.toRadians(80);
 
 			//LOD設定
-
 			scene.globe.maximumScreenSpaceError = 3;
 
 			//空
-
 			var sky = viewer.scene.skyAtmosphere;
 
 			sky.hueShift = 0.02;
@@ -294,7 +282,6 @@
 			sky.brightnessShift = 0.13;
 
 			//起動シークエンス
-
 			fadeInOut(blackOutDiv, 0);
 			fadeInOut(loadingDiv, 0);
 
@@ -327,7 +314,6 @@
 		}
 
 		//JSONロード
-
 		var jsonNum = 0;
 		var timer;
 		var jsonArray = [];
@@ -374,6 +360,7 @@
 			});
 		}
 
+		// ビルボード関連変数
 		var id;
 		var positionsCartesian3;
 		var iconUrl;
@@ -385,6 +372,7 @@
 		var scaleByDistance;
 		var translucencyByDistance;
 
+		//ビルボード・ラベル追加
 		function billboardLabelAdd(id, positionsCartesian3, iconUrl, name) {
 
 			billboardsAdd = billboards.add({
@@ -409,7 +397,6 @@
 		}
 
 		//視点移動
-
 		function changeViewPoint(num, delay) {
 			var newLat = viewPointsArray[num].lat;
 			var newLng = viewPointsArray[num].lng;
@@ -430,7 +417,6 @@
 		}
 
 		//ジオコード
-
 		function geocode() {
 			var geocoder = new google.maps.Geocoder();
 			var input = document.getElementById('inputtext').value;
@@ -461,7 +447,6 @@
 		}
 
 		//現在地へ移動
-
 		function flyToMyLocation() {
 			function fly(position) {
 				viewer.camera.flyTo({
@@ -474,7 +459,6 @@
 		}
 
 		//ヘルプ
-
 		function about() {
 			window.open(
 				'https://github.com/wtnv-lab/tweetMapping'
@@ -482,7 +466,6 @@
 		}
 
 		//DIVのフェードイン・アウト	
-
 		function fadeInOut(layer, param) {
 			if (param == 0) {
 				$(function () {
@@ -501,7 +484,6 @@
 		}
 
 		//テキスト検索
-
 		function textSearch() {
 			var searchQuery = String(document.getElementById('searchQuery').value);
 			var targetObject = jsonArray.filter(function (obj) {
