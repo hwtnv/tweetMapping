@@ -282,7 +282,6 @@
 
 			/* baseLayerPickerここまで */
 
-
 			viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
 			scene = viewer.scene;
 			viewer.camera.frustum.fov = Cesium.Math.toRadians(80);
@@ -533,53 +532,33 @@
 		//テキスト検索
 
 		function textSearch() {
-			console.log(jsonArray);
 			var searchQuery = String(document.getElementById('searchQuery').value);
-			var targetObject = jsonArray.filter(function (item, index) {
-				if (item.text.indexOf(searchQuery) == true) {
-					return searchQuery;
-				}
+			var targetObject = jsonArray.filter(function (obj) {
+				return obj.text.match(searchQuery);
 			});
+			var billboardsObject = viewer.scene.primitives._primitives[0]._billboards;
+			var labelsObject = viewer.scene.primitives._primitives[1]._labels;
+			for (var i = 0; i < billboardsObject.length; i++) {
+				if (searchQuery == "") {
+					billboardsObject[i].show = true;
+					labelsObject[i].show = true;
 
-			console.log(targetObject);
+					billboardsObject[i].translucencyByDistance = translucencyByDistance;
+					labelsObject[i].translucencyByDistance = translucencyByDistance;
 
-			/*
-			var dataSources = viewer.dataSources._dataSources;
-			var i = 0;
-			while (i < dataSources.length) {
-				var entityCollectionArray = dataSources[i]._entityCollection._entities._array;
-				var j = 0;
-				while (j < entityCollectionArray.length) {
-					if (entityCollectionArray[j].description !== void 0 &&
-						entityCollectionArray[j].name !== void 0) {
-						var description = entityCollectionArray[j].description._value;
-						var
-							name = entityCollectionArray[j].name;
-						if (name.indexOf(searchQuery) != -1 || description.indexOf(searchQuery) != -1) {
-							entityCollectionArray[j].show = true;
-						} else {
-							entityCollectionArray[j].show = false;
-						}
+				} else {
+					if (targetObject.find((v) => v.id === billboardsObject[i]._id)) {
+						billboardsObject[i].show = true;
+						labelsObject[i].show = true;
+
+						billboardsObject[i].translucencyByDistance = undefined;
+						labelsObject[i].translucencyByDistance = undefined;
+					} else {
+						billboardsObject[i].show = false;
+						labelsObject[i].show = false;
 					}
-					j++;
-				}
-				i++;
-				var
-					entitiesArray = viewer.entities._entities._array;
-				var n = 0;
-				while (n < entitiesArray.length) {
-					if (entitiesArray[n].description !== void 0) {
-						var entityDescription = entitiesArray[n].description._value;
-						if (entityDescription.indexOf(searchQuery) != -1) {
-							entitiesArray[n].show = true;
-						} else {
-							entitiesArray[n].show = false;
-						}
-					}
-					n++;
 				}
 			}
-			*/
 		}
 	</script>
 </body>

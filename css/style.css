@@ -306,11 +306,19 @@ input {
     width: 100px !important;
 }
 
+#textSearch {
+    opacity: 1.0;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10001;
+}
+
 .geocode {
     opacity: 1.0;
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 32px;
+    left: 8px;
     z-index: 10001;
 }
 
