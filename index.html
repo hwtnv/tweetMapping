@@ -285,6 +285,7 @@
 			fadeInOut(blackOutDiv, 0);
 			fadeInOut(loadingDiv, 0);
 
+			//ビルボード・ラベル用オブジェクト
 			billboardCollection = new Cesium.BillboardCollection();
 			billboards = viewer.scene.primitives.add(billboardCollection);
 			labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
@@ -360,7 +361,7 @@
 			});
 		}
 
-		// ビルボード関連変数
+		// ビルボード・ラベル用オブジェクト
 		var id;
 		var positionsCartesian3;
 		var iconUrl;
@@ -374,7 +375,6 @@
 
 		//ビルボード・ラベル追加
 		function billboardLabelAdd(id, positionsCartesian3, iconUrl, name) {
-
 			billboardsAdd = billboards.add({
 				id: id,
 				position: positionsCartesian3,
@@ -423,13 +423,11 @@
 			geocoder.geocode({
 					address: input
 				},
-
 				function (results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						var viewportObj = results[0].geometry.viewport;
 						var southNorth = viewportObj[Object.keys(viewportObj)[0]];
 						var westEast = viewportObj[Object.keys(viewportObj)[1]];
-
 						var south = southNorth[Object.keys(southNorth)[0]];
 						var north = southNorth[Object.keys(southNorth)[1]];
 						var west = westEast[Object.keys(westEast)[0]];
@@ -471,10 +469,6 @@
 				$(function () {
 					$(layer).fadeOut("slow");
 				});
-				if (param == 'streetView_wrapper') {
-					streetViewDiv.innerHTML = null;
-					delete svp;
-				}
 				viewer.trackedEntity = undefined;
 			} else {
 				$(function () {
@@ -492,18 +486,18 @@
 			var billboardsObject = viewer.scene.primitives._primitives[0]._billboards;
 			var labelsObject = viewer.scene.primitives._primitives[1]._labels;
 			for (var i = 0; i < billboardsObject.length; i++) {
+				// カラ検索で初期化
 				if (searchQuery == "") {
 					billboardsObject[i].show = true;
 					labelsObject[i].show = true;
-
 					billboardsObject[i].translucencyByDistance = translucencyByDistance;
 					labelsObject[i].translucencyByDistance = translucencyByDistance;
 
 				} else {
+					// 文字列が含まれるビルボードのみアクティブにする
 					if (targetObject.find((v) => v.id === billboardsObject[i]._id)) {
 						billboardsObject[i].show = true;
 						labelsObject[i].show = true;
-
 						billboardsObject[i].translucencyByDistance = undefined;
 						labelsObject[i].translucencyByDistance = undefined;
 					} else {
