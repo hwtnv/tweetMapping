@@ -314,7 +314,7 @@
 			setTimeout('loadTweets()', 3000);
 		}
 
-		//JSONロード
+		/* ここからJsonロード・ビルボード＆ラベル追加 */
 		var jsonNum = 0;
 		var timer;
 		var jsonArray = [];
@@ -395,6 +395,7 @@
 				translucencyByDistance: translucencyByDistance
 			});
 		}
+		/* ここまでJsonロード・ビルボード＆ラベル追加 */
 
 		//視点移動
 		function changeViewPoint(num, delay) {
