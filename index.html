@@ -180,11 +180,6 @@
 			Cesium.Ion.defaultAccessToken =
 				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZjdkOGRkYi1hYzIxLTQ4MDMtYjZiMC0zODg5YjI2ZTRlZjIiLCJpZCI6MjgyLCJzY29wZXMiOlsiYXNsIiwiYXNyIiwiYXN3IiwiZ2MiXSwiaWF0IjoxNTYyMDEyNTIyfQ.aVsGtowVeK_5C25G5-WCK7bZHyfXUl_zQ5Ud7TKsq0U';
 			viewer = new Cesium.Viewer('cesiumContainer', {
-				/*
-				terrainProvider: new Cesium.CesiumTerrainProvider({
-					url: Cesium.IonResource.fromAssetId(1)
-				}),
-				*/
 				navigationHelpButton: false,
 				navigationInstructionsInitiallyVisible: false,
 				geocoder: false,
@@ -199,14 +194,6 @@
 			var globe = viewer.scene.globe;
 			globe.imageryLayers.removeAll();
 			globe.baseColor = Cesium.Color.fromCssColorString('#000000');
-			/*
-						var arcGisWorldImagery = globe.imageryLayers.addImageryProvider(
-							new Cesium.ArcGisMapServerImageryProvider({
-								url: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-								enablePickFeatures: false
-							}));
-						arcGisWorldImagery.brightness = 0.45;
-			*/
 
 			/* ここからbaseLayerPicker追加 */
 
@@ -286,30 +273,10 @@
 			scene = viewer.scene;
 			viewer.camera.frustum.fov = Cesium.Math.toRadians(80);
 
-			//LOD，地形掩蔽設定
+			//LOD設定
 
 			scene.globe.maximumScreenSpaceError = 3;
-			viewer.scene.globe.depthTestAgainstTerrain = true;
 
-			//OSM Buildings
-			/*
-						viewer.scene.primitives.add(Cesium.createOsmBuildings({
-							dynamicScreenSpaceError: true,
-							style: new Cesium.Cesium3DTileStyle({
-								color: {
-									conditions: [
-										[true, "color('#bbbbbb',0.35)"]
-									]
-								}
-							})
-						}));
-			*/
-			//フォグ
-			/*
-			var fog = new Cesium.Fog();
-			fog.density = 1;
-			fog.screenSpaceErrorFactor = 100.0;
-			*/
 			//空
 
 			var sky = viewer.scene.skyAtmosphere;
@@ -372,9 +339,7 @@
 			var jsonFile = "data/czml/geoTweetTextOnly.json";
 			$.getJSON(jsonFile, function (json) {
 				for (var i = 0; i < 100; i++) {
-					//console.log (jsonNum,json.length);
 					if (jsonNum >= json.length) {
-						//console.log ("looped",jsonNum,json.length);
 						stopTimer();
 						delete jsonFile;
 						loadingDiv.innerHTML = "<p class='twCounter'>Completed.</p>";
@@ -399,7 +364,6 @@
 					}
 				}
 			});
-			//console.log(viewer.scene.primitives._primitives);
 		}
 
 		var id;
@@ -423,7 +387,6 @@
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
 				translucencyByDistance: translucencyByDistance
 			});
-			//billboardsAdd.name = name;
 			labelAdd = labels.add({
 				id: id,
 				position: positionsCartesian3,
