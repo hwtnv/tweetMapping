@@ -28,6 +28,31 @@ body,
     text-align: center;
 }
 
+/*コンテンツ表示*/
+
+#tweetMessage {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    height: auto;
+    width: 360px;
+    z-index: 20000;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 5px;
+}
+
+.tweettext {
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.time {
+    color: black;
+    font-size: 10px;
+}
+
 .cesium-home-button {
     visibility: hidden;
 }

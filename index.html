@@ -4,23 +4,23 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<meta name="description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
+	<meta name="description" content="東日本大震災発生後24時間以内の「減災リポート」のデジタルアーカイブ" />
 
 	<!-- 新規設置の際はURLの変更が必要 -->
-	<meta property="og:image" content="https://tweet.mapping.jp/data/screen.jpg" />
+	<meta property="og:image" content="https://311report.mapping.jp/data/screen.jpg" />
 
-	<meta property="og:description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
+	<meta property="og:description" content="東日本大震災発生後24時間以内の「減災リポート」のデジタルアーカイブ" />
 	<meta name="twitter:card" content="summary_large_image" />
 
 	<!-- 新規設置の際はIDの変更が必要 -->
 	<meta name="twitter:site" content="@hwtnv" />
 	<meta name="twitter:creator" content="@hwtnv" />
 
-	<meta name="twitter:title" content="東日本大震災ツイートマッピング" />
-	<meta name="twitter:description" content="東日本大震災発生後24時間以内につぶやかれたジオタグ付きツイートのデジタルアーカイブ" />
+	<meta name="twitter:title" content="東日本大震災「減災リポート」アーカイブ" />
+	<meta name="twitter:description" content="東日本大震災発生後24時間以内の「減災リポート」のデジタルアーカイブ" />
 
 	<!-- 新規設置の際はURLの変更が必要 -->
-	<meta name="twitter:image" content="https://tweet.mapping.jp/data/screen.jpg" />
+	<meta name="twitter:image" content="https://311report.mapping.jp/data/screen.jpg" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<title>東日本大震災ツイートマッピング</title>
@@ -79,6 +79,7 @@
 	</div>
 	<div id="cesiumContainer"></div>
 	<div id="baseLayerPickerContainer"></div>
+	<div id="tweetMessage"></div>
 	<div id="button" class="general-button">
 		<div class="button-content">
 			<span class="icon-font">menu</span>
@@ -168,9 +169,8 @@
 		}
 
 		var viewPointsArray = [];
-		viewPointsArray[0] = new viewPoints("日本全体", 34.009340, 135.843524, -47, -50, 2000000);
-		viewPointsArray[1] = new viewPoints("東日本", 35.96803491051254, 144.29395240936188, 305, -65,
-			591688.9303855194);
+		viewPointsArray[0] = new viewPoints("日本全国", 34.009340, 135.843524, -47, -50, 2000000);
+		viewPointsArray[1] = new viewPoints("初期視点", 37.819950, 141.101672, -27, -40, 240000);
 
 		//ビューア初期化	
 		var viewer;
@@ -290,8 +290,9 @@
 			billboards = viewer.scene.primitives.add(billboardCollection);
 			labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
 			pixelOffset = new Cesium.Cartesian2(0.0, -20);
-			scaleByDistance = new Cesium.NearFarScalar(0.0, 0.75, 7500, 0.35);
-			translucencyByDistance = new Cesium.NearFarScalar(500.0, 1.0, 100000, 0.1);
+			scaleByDistance = new Cesium.NearFarScalar(20000.0, 1.00, 200000, 0.5);
+			translucencyByDistance = new Cesium.NearFarScalar(500.0, 1.0, 100000, 0.2);
+			handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
 
 			setTimeout('groundZero()', 1000);
 		}
@@ -313,6 +314,7 @@
 		var jsonNum = 0;
 		var timer;
 		var jsonArray = [];
+		var handler;
 
 		function loadTweets() {
 			timer = setInterval(function () {
@@ -333,21 +335,24 @@
 						stopTimer();
 						delete jsonFile;
 						loadingDiv.innerHTML = "<p class='twCounter'>Completed.</p>";
-						setTimeout('fadeInOut(blackOutDiv,0)', 1000);
-						setTimeout('fadeInOut(loadingDiv,0)', 1000);
-						setTimeout('changeViewPoint(1, 3)', 1000);
+						setTimeout('fadeInOut(blackOutDiv,0)', 2000);
+						setTimeout('fadeInOut(loadingDiv,0)', 2000);
+						setTimeout('changeViewPoint(1, 3)', 2000);
+						descriptionBalloon();
 						break;
 					} else {
 						var id = json[jsonNum].id;
 						var name = json[jsonNum].name;
+						var description = json[jsonNum].text;
 						var iconUrl = json[jsonNum].iconUrl;
 						var positions = json[jsonNum].position.cartographicDegrees;
-						positions[2] = 200 + 200 * Math.random();
+						positions[2] = 400 + 400 * Math.random();
 						var positionsCartesian3 = Cesium.Cartesian3.fromDegreesArrayHeights(positions)[0];
 						billboardLabelAdd(id, positionsCartesian3, iconUrl, name);
 						jsonArray.push({
 							id: id,
-							text: name
+							text: name,
+							description: description
 						});
 						jsonNum++;
 						loadingDiv.innerHTML = "<p>" + jsonNum + "/" + json.length + "</p>";
@@ -355,6 +360,42 @@
 				}
 			});
 		}
+
+		function descriptionBalloon() {
+			handler.setInputAction(function onLeftClick(movement) {
+					var pickedObject = scene.pick(movement.position);
+					if (Cesium.defined(pickedObject)) {
+						console.log(pickedObject)
+						var pickedObjectId = pickedObject.id.toString();
+						$(tweetMessage).show();
+						var targetObject = jsonArray.find((n) => n.id === pickedObjectId);
+						text = targetObject.description;
+						console.log(text);
+						var windowWidth = $(window).width();
+						$(function () {
+							$(window).click(function (e) {
+								var rightMargin = windowWidth - e.pageX;
+								$(tweetMessage).html(text);
+								if (rightMargin < 320) {
+									$(tweetMessage).offset({
+										top: e.pageY + 8,
+										left: e.pageX - 312
+									});
+								} else {
+									$(tweetMessage).offset({
+										top: e.pageY + 8,
+										left: e.pageX + 8
+									});
+								}
+							});
+						});
+					} else {
+						$(tweetMessage).hide();
+					}
+				},
+				Cesium.ScreenSpaceEventType.LEFT_CLICK);
+		}
+
 
 		// ビルボード・ラベル用オブジェクト
 		var id;
@@ -374,14 +415,14 @@
 				id: id,
 				position: positionsCartesian3,
 				image: "data/icon/flags/" + iconUrl,
-				scale: 0.25,
+				scale: 0.5,
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-				translucencyByDistance: translucencyByDistance
+				//translucencyByDistance: translucencyByDistance
 			});
 			labelAdd = labels.add({
 				id: id,
 				position: positionsCartesian3,
-				font: "22pt Sans-Serif",
+				font: "12pt Sans-Serif",
 				style: Cesium.LabelStyle.FILL,
 				fillColor: Cesium.Color.WHITE,
 				pixelOffset: pixelOffset,
